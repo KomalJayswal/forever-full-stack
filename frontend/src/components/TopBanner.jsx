@@ -37,10 +37,12 @@ const TopBanner = () => {
   // Return the JSX (HTML-like syntax) that will be rendered
   return (
     // Main container div with full width and black background
-    // w-full: makes the div take full width of its parent
+    // fixed: makes the banner stick to the top of the viewport
+    // w-full: makes the div take full width of the viewport
     // overflow-hidden: prevents content from spilling outside the container
     // bg-black: sets the background color to black
-    <div className="w-full overflow-hidden bg-black">
+    // z-50: ensures the banner stays above other content
+    <div className="fixed top-0 left-0 w-full overflow-hidden bg-black z-50">
       {/* Container for the marquee animation */}
       {/* flex: makes this a flex container for horizontal layout */}
       {/* animate-marquee: applies the custom animation defined in tailwind.config.js */}
