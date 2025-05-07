@@ -67,17 +67,25 @@ const TopBanner = () => {
               {/* Container for padding and spacing */}
               {/* px-4: adds padding left and right */}
               <div className="px-4">
-                {/* Container for relative positioning of content */}
-                <div className="relative">
-                  {/* Main text showing product name and orders */}
-                  {/* font-bold: makes text bold */}
-                  <span className="font-bold">{item.up.text}</span> - <span className="font-bold">{item.up.orders} orders delivered</span>
-                  {/* Conditional rendering of subtext if it exists */}
-                  {/* Only renders if item.down exists */}
+                {/* Single line container for all content */}
+                {/* flex: makes items display in a row */}
+                {/* items-center: centers items vertically */}
+                {/* gap-2: adds small spacing between elements */}
+                <div className="flex items-center gap-2">
+                  {/* Product name in bold */}
+                  <span className="font-bold">{item.up.text}</span>
+                  {/* Separator */}
+                  <span>-</span>
+                  {/* Orders count in bold */}
+                  <span className="font-bold">{item.up.orders} orders delivered</span>
+                  {/* Conditional rendering of benefits if they exist */}
                   {item.down && (
-                    <div className="mt-1">
-                      {item.down.text}
-                    </div>
+                    <>
+                      {/* Separator */}
+                      <span>-</span>
+                      {/* Benefits text */}
+                      <span>{item.down.text}</span>
+                    </>
                   )}
                 </div>
               </div>
@@ -92,12 +100,16 @@ const TopBanner = () => {
           {bannerItems.map((item, index) => (
             <li key={index} className="flex items-center text-[#D1E2D7] text-xs border-r border-gray-300">
               <div className="px-4">
-                <div className="relative">
-                  <span className="font-bold">{item.up.text}</span> - <span className="font-bold">{item.up.orders} orders delivered</span>
+                {/* Single line container for all content */}
+                <div className="flex items-center gap-2">
+                  <span className="font-bold">{item.up.text}</span>
+                  <span>-</span>
+                  <span className="font-bold">{item.up.orders} orders delivered</span>
                   {item.down && (
-                    <div className="mt-1">
-                      {item.down.text}
-                    </div>
+                    <>
+                      <span>-</span>
+                      <span>{item.down.text}</span>
+                    </>
                   )}
                 </div>
               </div>
