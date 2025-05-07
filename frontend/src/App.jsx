@@ -13,6 +13,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import SearchBar from './components/SearchBar'
 import TopBanner from './components/TopBanner'
+import DiscountBanner from './components/DiscountBanner'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Verify from './pages/Verify'
@@ -26,8 +27,12 @@ const App = () => {
       {/* TopBanner placed outside the padded container for full width */}
       <TopBanner />
       
+      {/* DiscountBanner placed below TopBanner */}
+      <DiscountBanner />
+      
       {/* Main content container with padding */}
-      <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
+      {/* mt-[64px]: adds margin top to account for both banners */}
+      <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] mt-[64px]'>
         <Navbar />
         <SearchBar />
         <Routes>
