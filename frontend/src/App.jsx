@@ -14,6 +14,7 @@ import Footer from './components/Footer'
 import SearchBar from './components/SearchBar'
 import TopBanner from './components/TopBanner'
 import DiscountBanner from './components/DiscountBanner'
+import Header from './components/Header'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Verify from './pages/Verify'
@@ -29,6 +30,9 @@ const App = () => {
       
       {/* DiscountBanner placed below TopBanner */}
       <DiscountBanner />
+
+      {/* Header component with navigation and search */}
+      <Header />
       
       {/* Main content container with padding */}
       {/* mt-[64px]: adds margin top to account for both banners */}
