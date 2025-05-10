@@ -60,18 +60,35 @@ const listProducts = async (req, res) => {
         const data = await response.json();
         
         // Transform Shopify data to match our application's format
-        const transformedProducts = data.products.map(product => ({
-            _id: product.id.toString(),
-            name: product.title,
-            description: product.body_html || '',
-            price: parseFloat(product.variants[0]?.price || 0),
-            image: product.images.map(img => img.src),
-            category: product.product_type || 'Uncategorized',
-            subCategory: product.vendor || 'Uncategorized',
-            sizes: product.options.find(opt => opt.name.toLowerCase() === 'size')?.values || [],
-            bestseller: false,
-            date: new Date(product.created_at).getTime()
-        }));
+        const transformedProducts = data.products.map(product => {
+            // Get all size options from the product
+            const sizeOption = product.options.find(opt => 
+                opt.name.toLowerCase() === 'size' || 
+                opt.name.toLowerCase() === 'sizes' ||
+                opt.name.toLowerCase().includes('size')
+            );
+
+            // Get sizes from variants if no explicit size option exists
+            const sizesFromVariants = product.variants
+                .map(variant => variant.option1)
+                .filter((size, index, self) => self.indexOf(size) === index);
+
+            // Use size option values if available, otherwise use variant sizes
+            const sizes = sizeOption ? sizeOption.values : sizesFromVariants;
+
+            return {
+                _id: product.id.toString(),
+                name: product.title,
+                description: product.body_html || '',
+                price: parseFloat(product.variants[0]?.price || 0),
+                image: product.images.map(img => img.src),
+                category: product.product_type || 'Uncategorized',
+                subCategory: product.vendor || 'Uncategorized',
+                sizes: sizes || [],
+                bestseller: false,
+                date: new Date(product.created_at).getTime()
+            };
+        });
 
         res.json({ success: true, products: transformedProducts });
     } catch (error) {
