@@ -50,11 +50,7 @@ const addProduct = async (req, res) => {
 const listProducts = async (req, res) => {
     try {
         const response = await fetch('https://0mdsbb-0w.myshopify.com/admin/api/2025-04/products.json', {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'x-shopify-access-token': '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'
-            }
+            method: 'GET'
         });
         
         const data = await response.json();
