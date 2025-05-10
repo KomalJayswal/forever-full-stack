@@ -49,17 +49,38 @@ const addProduct = async (req, res) => {
 // function for list product
 const listProducts = async (req, res) => {
     try {
+        const response = await fetch('https://0mdsbb-0w.myshopify.com/admin/api/2025-04/products.json', {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'x-shopify-access-token': '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'
+            }
+        });
         
-        const products = await productModel.find({});
-        res.json({success:true,products})
+        const data = await response.json();
+        
+        // Transform Shopify data to match our application's format
+        const transformedProducts = data.products.map(product => ({
+            _id: product.id.toString(),
+            name: product.title,
+            description: product.body_html || '',
+            price: parseFloat(product.variants[0]?.price || 0),
+            image: product.images.map(img => img.src),
+            category: product.product_type || 'Uncategorized',
+            subCategory: product.vendor || 'Uncategorized',
+            sizes: product.options.find(opt => opt.name.toLowerCase() === 'size')?.values || [],
+            bestseller: false,
+            date: new Date(product.created_at).getTime()
+        }));
 
+        res.json({ success: true, products: transformedProducts });
     } catch (error) {
-        console.log(error)
-        res.json({ success: false, message: error.message })
+        console.log(error);
+        res.json({ success: false, message: error.message });
     }
 }
 
-// function for removing product
+// function for remove product
 const removeProduct = async (req, res) => {
     try {
         
