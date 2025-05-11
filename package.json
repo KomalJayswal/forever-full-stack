@@ -1,0 +1,29 @@
+{
+  "name": "forever-full-stack",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/server/server.js",
+    "server": "nodemon src/server/server.js",
+    "client": "cd src/client && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "cd src/client && npm run build",
+    "install-all": "npm install && cd src/client && npm install"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cloudinary": "^2.4.0",
+    "concurrently": "^8.2.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.5.3",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.1.4",
+    "razorpay": "^2.9.4",
+    "stripe": "^16.8.0",
+    "validator": "^13.12.0"
+  }
+} 
